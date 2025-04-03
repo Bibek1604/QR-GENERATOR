@@ -1,6 +1,4 @@
-Got it! Here's the updated README file with **Django** as the technology used:
 
----
 
 # QR Code Generation for Bank Accounts
 
