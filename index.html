@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced QR Code Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'forest-green': '#2f855a',
+                        'lime-green': '#48bb78',
+                        'light-green': '#9ae6b4',
+                        'dark-green': '#22543d',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #f0f7f4, #e6f0ea);
+        }
+        .scrollable-select {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center py-10">
+    <div class="container max-w-xl mx-auto p-8 bg-white rounded-xl shadow-2xl">
+        <h1 class="text-4xl font-extrabold text-forest-green text-center mb-8">
+            <i class="fas fa-qrcode mr-3"></i> Nepal QR Code Generator
+        </h1>
+
+        <form id="qrCodeForm" class="space-y-6">
+            <div class="flex items-center space-x-4">
+                <label for="fullName" class="w-1/3 text-dark-green font-semibold"><i class="fas fa-user mr-2"></i> Full Name:</label>
+                <input type="text" id="fullName" name="fullName" class="w-2/3 p-3 border border-lime-green rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-green transition" placeholder="Enter Full Name">
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <label for="accountNumber" class="w-1/3 text-dark-green font-semibold"><i class="fas fa-id-card mr-2"></i> Account Number:</label>
+                <input type="text" id="accountNumber" name="accountNumber" class="w-2/3 p-3 border border-lime-green rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-green transition" placeholder="Account Number">
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <label for="bankSelect" class="w-1/3 text-dark-green font-semibold"><i class="fas fa-university mr-2"></i> Bank:</label>
+                <select id="bankSelect" class="w-2/3 p-3 border border-lime-green rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-green scrollable-select transition">
+                    <option value="">Select a Bank</option>
+                    <!-- Class A: Commercial Banks -->
+                    <optgroup label="Class A: Commercial Banks">
+                        <option value="Nepal Bank Ltd." data-swift="NEBLNPKA">Nepal Bank Ltd. (1937/11/15, Dharmapath, Kathmandu, 804.27 Cr)</option>
+                        <option value="Agriculture Development Bank Ltd." data-swift="ADBLNPKA">Agriculture Development Bank Ltd. (1968/01/21, Ramshahpath, Kathmandu, 1393.79 Cr)</option>
+                        <option value="Nabil Bank Ltd." data-swift="NARBNPKA">Nabil Bank Ltd. (1984/07/12, Beena Marg, Kathmandu, 804.32 Cr)</option>
+                        <option value="Nepal Investment Bank Ltd." data-swift="NIBLNPKT">Nepal Investment Bank Ltd. (1986/03/09, Durbarmarg, Kathmandu, 1064.56 Cr)</option>
+                        <option value="Standard Chartered Bank Nepal Ltd." data-swift="SCBLNPKA">Standard Chartered Bank Nepal Ltd. (1987/02/28, Nayabaneshwor, Kathmandu, 801.14 Cr)</option>
+                        <option value="Himalayan Bank Ltd." data-swift="HIMANPKA">Himalayan Bank Ltd. (1993/01/18, Kamaladi, Kathmandu, 811.45 Cr)</option>
+                        <option value="Nepal SBI Bank Ltd." data-swift="NSBINPKA">Nepal SBI Bank Ltd. (1993/07/07, Kesharmahal, Kathmandu, 804.69 Cr)</option>
+                        <option value="Nepal Bangladesh Bank Ltd." data-swift="NPBBNPKA">Nepal Bangladesh Bank Ltd. (1994/06/06, Kamaladi, Kathmandu, 808.81 Cr)</option>
+                        <option value="Everest Bank Ltd." data-swift="EVBLNPKA">Everest Bank Ltd. (1994/10/18, Lazimpat, Kathmandu, 810.69 Cr)</option>
+                        <option value="Kumari Bank Ltd." data-swift="KMBLNPKA">Kumari Bank Ltd. (2001/04/03, Durbarmarg, Kathmandu, 596.95 Cr)</option>
+                        <option value="Laxmi Bank Ltd." data-swift="LXBLNPKA">Laxmi Bank Ltd. (2002/04/03, Hattisar, Kathmandu, 822.17 Cr)</option>
+                        <option value="Citizens Bank International Ltd." data-swift="CTZNNPKA">Citizens Bank International Ltd. (2007/04/20, Narayanhitipath, Kathmandu, 803.32 Cr)</option>
+                        <option value="Prime Commercial Bank Ltd." data-swift="PCBLNPKA">Prime Commercial Bank Ltd. (2007/09/24, Kamalpokhari, Kathmandu, 803.33 Cr)</option>
+                        <option value="Sunrise Bank Ltd." data-swift="SRBLNPKA">Sunrise Bank Ltd. (2007/10/12, Gairidhara, Kathmandu, 815.26 Cr)</option>
+                        <option value="Century Commercial Bank Ltd." data-swift="CCBNNPKA">Century Commercial Bank Ltd. (2011/03/10, Putalisadak, Kathmandu, 806.34 Cr)</option>
+                        <option value="Sanima Bank Ltd." data-swift="SNMANPKA">Sanima Bank Ltd. (2012/02/15, Nagpokhari, Kathmandu, 800.13 Cr)</option>
+                        <option value="Machhapuchhre Bank Ltd." data-swift="MBLNNPKA">Machhapuchhre Bank Ltd. (2012/07/09*, Lazimpat, Kathmandu, 805.57 Cr)</option>
+                        <option value="NIC Asia Bank Ltd." data-swift="NICENPKA">NIC Asia Bank Ltd. (2013/06/30*, Thapathali, Kathmandu, 803.11 Cr)</option>
+                        <option value="Global IME Bank Ltd." data-swift="GLBBNPKA">Global IME Bank Ltd. (2014/04/09*, Panipokhari, Kathmandu, 888.84 Cr)</option>
+                        <option value="NMB Bank Ltd." data-swift="NMBBNPKA">NMB Bank Ltd. (2015/10/18*, Babarmahal, Kathmandu, 646.18 Cr)</option>
+                        <option value="Prabhu Bank Ltd." data-swift="PRVBNPKA">Prabhu Bank Ltd. (2016/02/12*, Babarmahal, Kathmandu, 800.13 Cr)</option>
+                        <option value="Siddhartha Bank Ltd." data-swift="SIDDNPKA">Siddhartha Bank Ltd. (2016/07/21*, Hattisar, Kathmandu, 846.44 Cr)</option>
+                        <option value="Bank of Kathmandu Ltd." data-swift="BOKLNPKA">Bank of Kathmandu Ltd. (2016/07/14*, Kamaladi, Kathmandu, 624.54 Cr)</option>
+                        <option value="Civil Bank Ltd." data-swift="CIVLNPKA">Civil Bank Ltd. (2016/10/17*, Kamaladi, Kathmandu, 725.93 Cr)</option>
+                        <option value="Nepal Credit and Commerce Bank Ltd." data-swift="NBOCNPKA">Nepal Credit and Commerce Bank Ltd. (2017/01/01*, Bagbazar, Kathmandu, 467.91 Cr)</option>
+                        <option value="Janata Bank Nepal Ltd." data-swift="JBNLNPKA">Janata Bank Nepal Ltd. (2017/04/07*, Thapathali, Kathmandu, 800.08 Cr)</option>
+                        <option value="Rastriya Banijya Bank Ltd." data-swift="RBBANPKA">Rastriya Banijya Bank Ltd. (2018/05/02*, Singhadurbarplaza, Kathmandu, 900.48 Cr)</option>
+                        <option value="Mega Bank Nepal Ltd." data-swift="MBNLNPKA">Mega Bank Nepal Ltd. (2018/05/13*, Kamaladi, Kathmandu, 928.68 Cr)</option>
+                    </optgroup>
+                    <!-- Class B: Development Banks -->
+                    <optgroup label="Class B: Development Banks">
+                        <option value="Narayani Development Bank Ltd." data-swift="NDBKNPKA">Narayani Development Bank Ltd. (2001/10/17, Ratna Nagar, Chitawan, 5.56 Cr)</option>
+                        <option value="Sahayogi Vikas Bank Ltd." data-swift="SVBLNPKA">Sahayogi Vikas Bank Ltd. (2003/10/23, Janakpurdham, Dhanusha, 50.97 Cr)</option>
+                        <option value="Karnali Bikash Bank Ltd." data-swift="KRBLNPKA">Karnali Bikash Bank Ltd. (2004/02/18, Nepalgunj, Banke, 15.10 Cr)</option>
+                        <option value="Excel Development Bank Ltd." data-swift="EDBLNPKA">Excel Development Bank Ltd. (2005/07/21, Birtamod, Jhapa, 69.27 Cr)</option>
+                        <option value="Miteri Development Bank Ltd." data-swift="MDBLNPKA">Miteri Development Bank Ltd. (2006/10/13, Dharan, Sunsari, 50.00 Cr)</option>
+                        <option value="Tinau Bikas Bank Ltd." data-swift="TBBLNPKA">Tinau Bikas Bank Ltd. (2006/11/01, Butwal, Rupandehi, 50.69 Cr)</option>
+                        <option value="Muktinath Bikas Bank Ltd." data-swift="MKBLNPKA">Muktinath Bikas Bank Ltd. (2007/01/03, Kamaladi, Kathmandu, 259.18 Cr)</option>
+                        <option value="Kankai Bikas Bank Ltd." data-swift="KKBLNPKA">Kankai Bikas Bank Ltd. (2007/05/03, Damak, Jhapa, 50.00 Cr)</option>
+                        <option value="Bhargab Bikas Bank Ltd." data-swift="BHBLNPKA">Bhargab Bikas Bank Ltd. (2007/08/30, Nepalgunj, Banke, 40.84 Cr)</option>
+                        <option value="Corporate Development Bank Ltd." data-swift="CDBLNPKA">Corporate Development Bank Ltd. (2007/11/07, Birgunj, Parsa, 20.00 Cr)</option>
+                        <option value="Kabeli Bikas Bank Ltd." data-swift="KABLNPKA">Kabeli Bikas Bank Ltd. (2007/12/16, Dhankutabazaar, Dhankuta, 22.30 Cr)</option>
+                        <option value="Purnima Bikas Bank Ltd." data-swift="PUBKNPKA">Purnima Bikas Bank Ltd. (2008/05/20, Siddharthanagar, Rupandehi, 52.50 Cr)</option>
+                        <option value="Hamro Bikas Bank Ltd." data-swift="HBBLNPKA">Hamro Bikas Bank Ltd. (2009/04/19, Battar, Nuwakot, 49.22 Cr)</option>
+                        <option value="Kanchan Development Bank Ltd." data-swift="KCBLNPKA">Kanchan Development Bank Ltd. (2009/09/19, Mahendranagar, Kanchanpur, 50.60 Cr)</option>
+                        <option value="Mission Development Bank Ltd." data-swift="MDBKNPKA">Mission Development Bank Ltd. (2010/06/15, Butwal, Rupandehi, 51.93 Cr)</option>
+                        <option value="Sindhu Bikas Bank Ltd." data-swift="SBBLNPKA">Sindhu Bikas Bank Ltd. (2010/09/09, Barhabise, Sindhupalchowk, 41.81 Cr)</option>
+                        <option value="Sahara Bikas Bank Ltd." data-swift="SHBLNPKA">Sahara Bikas Bank Ltd. (2010/10/27, Malangawa, Sarlahi, 7.30 Cr)</option>
+                        <option value="Nepal Community Development Bank Ltd." data-swift="NCBLNPKA">Nepal Community Development Bank Ltd. (2010/11/03, Butwal, Rupendehi, 48.46 Cr)</option>
+                        <option value="Salapa Bikash Bank Ltd." data-swift="SLBLNPKA">Salapa Bikash Bank Ltd. (2012/07/16, Diktel, Khotang, 2.80 Cr)</option>
+                        <option value="Saptakoshi Development Bank Ltd." data-swift="SKBLNPKA">Saptakoshi Development Bank Ltd. (2012/10/02, Tankisunuwari, Morang, 50.85 Cr)</option>
+                        <option value="Green Development Bank Ltd." data-swift="GDBLNPKA">Green Development Bank Ltd. (2013/08/25, Baglung Bazar, Baglung, 10.00 Cr)</option>
+                        <option value="Sangrila Development Bank Ltd." data-swift="SABLNPKA">Sangrila Development Bank Ltd. (2014/07/13*, Baluwatar, Kathmandu, 244.53 Cr)</option>
+                        <option value="Deva Development Bank Ltd." data-swift="DVBLNPKA">Deva Development Bank Ltd. (2015/07/10*, Laldurbar, Kathmandu, 208.46 Cr)</option>
+                        <option value="Kailash Bikash Bank Ltd." data-swift="KIBLNPKA">Kailash Bikash Bank Ltd. (2016/04/04*, Putalisadak, Kathmandu, 252.06 Cr)</option>
+                        <option value="Shine Resunga Development Bank Ltd." data-swift="SRBLNPKA">Shine Resunga Development Bank Ltd. (2013/03/17*, Butawal, Rupandehi, 137.86 Cr)</option>
+                        <option value="Jyoti Bikas Bank Ltd." data-swift="JYBLNPKA">Jyoti Bikas Bank Ltd. (2016/08/12*, Kamaladi, Kathmandu, 259.36 Cr)</option>
+                        <option value="Garima Bikas Bank Ltd." data-swift="GABLNPKA">Garima Bikas Bank Ltd. (2016/09/20*, Lazimpat, Kathmandu, 253.49 Cr)</option>
+                        <option value="Om Development Bank Ltd." data-swift="OMBLNPKA">Om Development Bank Ltd. (2017/06/16*, Pokhara, Kaski, 251.52 Cr)</option>
+                        <option value="Mahalaxmi Bikas Bank Ltd." data-swift="MHBLNPKA">Mahalaxmi Bikas Bank Ltd. (2017/07/02*, Durbar Marg, Kathmandu, 263.38 Cr)</option>
+                        <option value="Gandaki Bikas Bank Ltd." data-swift="GDBLNPKA">Gandaki Bikas Bank Ltd. (2017/07/05*, Pokhara, Kaski, 275.00 Cr)</option>
+                        <option value="Lumbini Bikas Bank Ltd." data-swift="LUBLNPKA">Lumbini Bikas Bank Ltd. (2017/07/09*, Dillibazar, Kathmandu, 214.96 Cr)</option>
+                        <option value="Kamana Sewa Bikas Bank Ltd." data-swift="KSBLNPKA">Kamana Sewa Bikas Bank Ltd. (2017/08/04*, Gyaneshwor, Kathmandu, 235.71 Cr)</option>
+                        <option value="Western Development Bank Ltd." data-swift="WDBLNPKA">Western Development Bank Ltd. (2017/10/15*, Ghorahi, Dang, 42.93 Cr)</option>
+                    </optgroup>
+                    <!-- Class C: Finance Companies -->
+                    <optgroup label="Class C: Finance Companies">
+                        <option value="Nepal Finance Ltd." data-swift="NFCLNPKA">Nepal Finance Ltd. (1993/01/06, Kamaladi, Kathmandu, 13.58 Cr)</option>
+                        <option value="Nepal Share Markets and Finance Ltd." data-swift="NSMFNPKA">Nepal Share Markets and Finance Ltd. (1993/10/19, Ramshahapath, Kathmandu, 23.33 Cr)</option>
+                        <option value="Goodwill Finance Ltd." data-swift="GWFLNPKA">Goodwill Finance Ltd. (1995/05/15, Hattisar, Kathmandu, 80.00 Cr)</option>
+                        <option value="Lalitpur Finance Co. Ltd." data-swift="LFCLNPKA">Lalitpur Finance Co. Ltd. (1995/12/14, Lagankhel, Lalitpur, 23.69 Cr)</option>
+                        <option value="United Finance Co. Ltd." data-swift="UFCLNPKA">United Finance Co. Ltd. (1996/01/26, Durbarmarg, Kathmandu, 80.05 Cr)</option>
+                        <option value="Best Finance Ltd." data-swift="BFCLNPKA">Best Finance Ltd. (1996/02/01, Chabahil, Kathmandu, 29.75 Cr)</option>
+                        <option value="Progressive Finance Co. Ltd." data-swift="PFCLNPKA">Progressive Finance Co. Ltd. (1996/02/26, Newroad, Kathmandu, 21.00 Cr)</option>
+                        <option value="Janaki Finance Co. Ltd." data-swift="JFCLNPKA">Janaki Finance Co. Ltd. (1997/03/07, Janakpurdham, Dhanusha, 40.34 Cr)</option>
+                        <option value="Pokhara Finance Ltd." data-swift="POFLNPKA">Pokhara Finance Ltd. (1997/03/16, Pokhara, Kaski, 75.42 Cr)</option>
+                        <option value="Hathway Finance Company Ltd." data-swift="HFCLNPKA">Hathway Finance Company Ltd. (1997/08/17, Dharan, Sunsari, 30.00 Cr)</option>
+                        <option value="Multipurpose Finance Co. Ltd" data-swift="MPFLNPKA">Multipurpose Finance Co. Ltd (1998/04/15, Rajbiraj, Saptari, 4.15 Cr)</option>
+                        <option value="Shrijana Finance Ltd." data-swift="SHFLNPKA">Shrijana Finance Ltd. (1999/12/14, Biratnagar, Morang, 40.07 Cr)</option>
+                        <option value="World Merchant Banking & Finance Ltd." data-swift="WMBFNPKA">World Merchant Banking & Finance Ltd. (2001/08/10, Hetauda, Makawanpur, 18.20 Cr)</option>
+                        <option value="Capital Merchant Banking & Finance Co. Ltd." data-swift="CMBFNPKA">Capital Merchant Banking & Finance Co. Ltd. (2002/02/01, Battisputali, Kathmandu, 93.51 Cr)</option>
+                        <option value="Crystal Finance Ltd." data-swift="CRFLNPKA">Crystal Finance Ltd. (2002/03/13, Thapathali, Kathmandu, 7.00 Cr)</option>
+                        <option value="Guheshwori Merchant Banking & Finance Ltd." data-swift="GMBFNPKA">Guheshwori Merchant Banking & Finance Ltd. (2002/06/13, Pulchowk, Lalitpur, 80.00 Cr)</option>
+                        <option value="ICFC Finance Ltd." data-swift="ICFCNPKA">ICFC Finance Ltd. (2004/07/15, Bhatbhateni, Kathmandu, 88.22 Cr)</option>
+                        <option value="City Express Finance Company Ltd." data-swift="CEFLNPKA">City Express Finance Company Ltd. (2006/03/24, Durbarmagra, Kathmandu, 15.00 Cr)</option>
+                        <option value="Manjushree Financial Institution Ltd." data-swift="MFILNPKA">Manjushree Financial Institution Ltd. (2007/10/17, Nayabaneshwor, Kathmandu, 80.01 Cr)</option>
+                        <option value="Jebil's Finance Ltd." data-swift="JEFLNPKA">Jebil's Finance Ltd. (2009/10/28, Newroad, Kathmandu, 57.79 Cr)</option>
+                        <option value="Synergy Finance Ltd." data-swift="SYFLNPKA">Synergy Finance Ltd. (2012/12/06*, Butawal, Rupandehi, 47.44 Cr)</option>
+                        <option value="Reliance Finance Ltd." data-swift="REFLNPKA">Reliance Finance Ltd. (2014/05/08*, Pradarsani Marg, Kathmandu, 71.31 Cr)</option>
+                        <option value="Gorkhas Finance Ltd." data-swift="GOFLNPKA">Gorkhas Finance Ltd. (2016/04/10*, Dillibazar, Kathmandu, 86.80 Cr)</option>
+                        <option value="Shree Investment & Finance Co. Ltd." data-swift="SIFCNPKA">Shree Investment & Finance Co. Ltd. (2017/02/01*, Dillibazar, Kathmandu, 63.22 Cr)</option>
+                        <option value="Central Finance Ltd." data-swift="CEFLNPKA">Central Finance Ltd. (2017/03/23*, Kupondole, Lalitpur, 73.54 Cr)</option>
+                    </optgroup>
+                    <!-- Class D: Micro Finance Financial Institutions -->
+                    <optgroup label="Class D: Micro Finance Institutions">
+                        <option value="Nirdhan Utthan Laghubitta Bittiya Sanstha Ltd." data-swift="NULBNPKA">Nirdhan Utthan Laghubitta Bittiya Sanstha Ltd. (1999/07/17, Naxal, Kathmandu, 100.00 Cr)</option>
+                        <option value="RMDC Laghubitta Bittiya Sanstha Ltd." data-swift="RMDCNPKA">RMDC Laghubitta Bittiya Sanstha Ltd. (1999/12/06, Putalisadak, Kathmandu, 72.67 Cr)</option>
+                        <option value="Deprosc Laghubitta Bittiya Sanstha Ltd." data-swift="DLBSNPKA">Deprosc Laghubitta Bittiya Sanstha Ltd. (2001/07/03, Bharatpur, Chitwan, 70.31 Cr)</option>
+                        <option value="Chhimek Laghubitta Bittiya Sanstha Ltd." data-swift="CLBSNPKA">Chhimek Laghubitta Bittiya Sanstha Ltd. (2001/12/10, Old Baneshwor, Kathmandu, 100.00 Cr)</option>
+                        <option value="Shawalamban Laghubitta Bittiya Sanstha Ltd." data-swift="SLBSNPKA">Shawalamban Laghubitta Bittiya Sanstha Ltd. (2002/02/22, Lalcolony Marg, Kathmandu, 50.31 Cr)</option>
+                        <option value="Sana Kisan Laghubitta Bittiya Sanstha Ltd." data-swift="SKBSNPKA">Sana Kisan Laghubitta Bittiya Sanstha Ltd. (2002/03/11, Subidhanagar, Kathmandu, 62.88 Cr)</option>
+                        <option value="Nerude Laghubitta Bittiya Sanstha Ltd." data-swift="NLBSNPKA">Nerude Laghubitta Bittiya Sanstha Ltd. (2007/06/15, Biratnagar, Morang, 34.58 Cr)</option>
+                        <option value="Naya Nepal Laghubitta Bittiya Sanstha Ltd." data-swift="NNBSNPKA">Naya Nepal Laghubitta Bittiya Sanstha Ltd. (2009/03/20, Dhulikhel, Kavre, 2.40 Cr)</option>
+                        <option value="Mithila Laghubitta Bittiya Sanstha Ltd." data-swift="MLBSNPKA">Mithila Laghubitta Bittiya Sanstha Ltd. (2009/04/29, Dhalkebar, Dhanusha, 6.60 Cr)</option>
+                        <option value="Summit Microfinance Development Bank Ltd." data-swift="SMDBNPKA">Summit Microfinance Development Bank Ltd. (2009/05/20, Birtamod, Jhapa, 14.50 Cr)</option>
+                        <option value="Sworojagar Laghubitta Bittiya Sanstha Ltd." data-swift="SWBSNPKA">Sworojagar Laghubitta Bittiya Sanstha Ltd. (2009/12/16, Banepa, Kavre, 12.25 Cr)</option>
+                        <option value="First Microfinance Laghubitta Bittiya Sanstha Ltd." data-swift="FMBSNPKA">First Microfinance Laghubitta Bittiya Sanstha Ltd. (2009/12/28, Gyaneshwor, Kathmandu, 68.17 Cr)</option>
+                        <option value="Nagbeli Laghubitta Bittiya Sanstha Ltd." data-swift="NGBLNPKA">Nagbeli Laghubitta Bittiya Sanstha Ltd. (2010/02/04, Birtamod, Jhapa, 7.66 Cr)</option>
+                        <option value="Kalika Microcredit Development Bank Ltd." data-swift="KMDBNPKA">Kalika Microcredit Development Bank Ltd. (2010/07/21, Waling, Syangja, 10.00 Cr)</option>
+                        <option value="Mirmire Microfinance Development Bank Ltd." data-swift="MMDBNPKA">Mirmire Microfinance Development Bank Ltd. (2010/09/23, Banepa, Kavre, 5.89 Cr)</option>
+                        <option value="Janautthan Samudayik Microfinance Dev. Bank Ltd." data-swift="JSMDNPKA">Janautthan Samudayik Microfinance Dev. Bank Ltd. (2010/11/09, Butwal, Rupandehi, 2.88 Cr)</option>
+                        <option value="Womi Microfinance Bittiya Sanstha Ltd." data-swift="WMBSNPKA">Womi Microfinance Bittiya Sanstha Ltd. (2012/03/08, Bharatpur, Chitwan, 7.78 Cr)</option>
+                        <option value="Laxmi Microfinance Bittiya Sanstha Ltd." data-swift="LMBSNPKA">Laxmi Microfinance Bittiya Sanstha Ltd. (2012/06/04, Maharajgunj, Kathmandu, 24.20 Cr)</option>
+                        <option value="Civil Laghubitta Bittiya Sanstha Ltd." data-swift="CLBSNPKA">Civil Laghubitta Bittiya Sanstha Ltd. (2012/07/05, Chuchepati, Kathmandu, 10.97 Cr)</option>
+                        <option value="Mahila Sahayatra Microfinance Bittiya Sanstha Ltd." data-swift="MSMSNPKA">Mahila Sahayatra Microfinance Bittiya Sanstha Ltd. (2012/12/25, Chitlang, Makwanpur, 12.10 Cr)</option>
+                        <option value="Kisan Microfinance Bittiya Sanstha Ltd." data-swift="KMBSNPKA">Kisan Microfinance Bittiya Sanstha Ltd. (2013/01/16, Lamkichuha, Kailali, 4.81 Cr)</option>
+                        <option value="Vijaya Laghubitta Bittiya Sanstha Ltd." data-swift="VLBSNPKA">Vijaya Laghubitta Bittiya Sanstha Ltd. (2013/03/28, Gaidakot, Nawalparasi, 17.71 Cr)</option>
+                        <option value="NMB Microfinance Bittiya Sanstha Ltd." data-swift="NMBSNPKA">NMB Microfinance Bittiya Sanstha Ltd. (2013/03/31, Pokhara-Hemja, Kaski, 14.09 Cr)</option>
+                        <option value="FORWARD Community Microfinance Bittiya Sanstha Ltd." data-swift="FCMBNPKA">FORWARD Community Microfinance Bittiya Sanstha Ltd. (2013/05/17, Duhabi Bhaluwa, Sunsari, 30.02 Cr)</option>
+                        <option value="Global IME Laghubitta Bittiya Sanstha Ltd." data-swift="GIMLNPKA">Global IME Laghubitta Bittiya Sanstha Ltd. (2013/05/19, Besisahar, Lamjung, 9.61 Cr)</option>
+                        <option value="Mahuli Samudyik Laghubitta Bittiya Sanstha Ltd." data-swift="MSLBNPKA">Mahuli Samudyik Laghubitta Bittiya Sanstha Ltd. (2013/06/15, Bakdhuwa, Saptari, 6.00 Cr)</option>
+                        <option value="Suryodaya Laghubitta Bitiya Sanstha Ltd." data-swift="SLBSNPKA">Suryodaya Laghubitta Bitiya Sanstha Ltd. (2013/07/16, Putalibazar, Syanja, 7.28 Cr)</option>
+                        <option value="Mero Microfinance Bittiya Sanatha Ltd." data-swift="MMBSNPKA">Mero Microfinance Bittiya Sanatha Ltd. (2013/07/18, Battar, Nuwakot, 28.60 Cr)</option>
+                        <option value="Samata Microfinance Bittiya Sanatha Ltd." data-swift="SMBSNPKA">Samata Microfinance Bittiya Sanatha Ltd. (2013/08/25, Pipra, Simara, 3.79 Cr)</option>
+                        <option value="RSDC Laghubitta Bitiya Sanstha Ltd." data-swift="RSLBNPKA">RSDC Laghubitta Bitiya Sanstha Ltd. (2013/09/11, Butwal, Rupandehi, 36.00 Cr)</option>
+                        <option value="Samudayik Laghubitta Bitiya Sanstha Ltd." data-swift="SMLBNPKA">Samudayik Laghubitta Bitiya Sanstha Ltd. (2014/04/13, Panchkhal, Kavre, 7.00 Cr)</option>
+                        <option value="National Microfinance Bittiya Sanstha Ltd." data-swift="NMFSNPKA">National Microfinance Bittiya Sanstha Ltd. (2014/07/02, Nilkantha, Dhading, 12.04 Cr)</option>
+                        <option value="Nepal Grameen Bikas Bank Ltd." data-swift="NGBBNPKA">Nepal Grameen Bikas Bank Ltd. (2014/08/15*, Butawal, Rupandehi, 65.50 Cr)</option>
+                        <option value="Nepal Sewa Laghubitta Bittiya Sanstha Ltd." data-swift="NSLBNPKA">Nepal Sewa Laghubitta Bittiya Sanstha Ltd. (2014/10/26, Phataksila, Sindhupalchok, 6.00 Cr)</option>
+                        <option value="Unnati Microfinance Bittiya Sanstha Ltd." data-swift="UMBSNPKA">Unnati Microfinance Bittiya Sanstha Ltd. (2014/11/07, Padsari, Rupandehi, 5.50 Cr)</option>
+                        <option value="Swadeshi Lagubitta Bittiya Sanstha Ltd." data-swift="SWLBNPKA">Swadeshi Lagubitta Bittiya Sanstha Ltd. (2014/12/31, Itahari, Sunsari, 11.50 Cr)</option>
+                        <option value="NADEP Laghubitta Bittiya Sanstha Ltd." data-swift="NADBNPKA">NADEP Laghubitta Bittiya Sanstha Ltd. (2015/05/15, Gajuri, Dhading, 11.20 Cr)</option>
+                        <option value="Support Microfinance Bittiya Sanstha Ltd." data-swift="SMFBNPKA">Support Microfinance Bittiya Sanstha Ltd. (2015/07/12, Hasposa, Itahari, 6.00 Cr)</option>
+                        <option value="Arambha Microfinance Bittiya Sanstha Ltd." data-swift="AMBSNPKA">Arambha Microfinance Bittiya Sanstha Ltd. (2015/07/23, Ugratara, Kavrepalanchok, 6.00 Cr)</option>
+                        <option value="Janasewi Laghubitta Bittiya Sanstha Ltd." data-swift="JLBSNPKA">Janasewi Laghubitta Bittiya Sanstha Ltd. (2015/09/29, Kushma, Parbat, 5.08 Cr)</option>
+                        <option value="Chautari Laghubitta Bittiya Sanstha Ltd." data-swift="CLBSNPKA">Chautari Laghubitta Bittiya Sanstha Ltd. (2016/01/03, Butawal, Rupandehi, 12.60 Cr)</option>
+                        <option value="Ghodighoda Laghubitta Bittiya Sanstha Ltd." data-swift="GLBSNPKA">Ghodighoda Laghubitta Bittiya Sanstha Ltd. (2016/06/12, Sripur Belouri, Kanchanpur, 1.11 Cr)</option>
+                        <option value="Asha Lagubitta Bittiya Sastha Ltd." data-swift="ALBSNPKA">Asha Lagubitta Bittiya Sastha Ltd. (2016/08/29, Madanpur Nuwakot, 7.00 Cr)</option>
+                        <option value="Nepal Agro Microfinance Bittiya Sastha Ltd." data-swift="NAMBNPKA">Nepal Agro Microfinance Bittiya Sastha Ltd. (2016/09/20, Pokhara, Kaski, 2.80 Cr)</option>
+                        <option value="Rama Roshan Microfinance Bittiya Sastha Ltd." data-swift="RRBSNPKA">Rama Roshan Microfinance Bittiya Sastha Ltd. (2016/09/22, Mangalsen, Acham, 1.34 Cr)</option>
+                        <option value="Creative LaghuBitta Bittiya Sastha Ltd." data-swift="CLBSNPKA">Creative LaghuBitta Bittiya Sastha Ltd. (2016/09/25, Pratapur, Kailali, 1.40 Cr)</option>
+                        <option value="Gurans LaghuBitta Bittiya Sastha Ltd." data-swift="GLBSNPKA">Gurans LaghuBitta Bittiya Sastha Ltd. (2016/11/16, Dhankutabazaar, Dhankuta, 4.20 Cr)</option>
+                        <option value="Ganapati Microfinance Bittiya Sastha Ltd." data-swift="GMBSNPKA">Ganapati Microfinance Bittiya Sastha Ltd. (2016/12/09, Shuklagandaki, Tanahu, 7.00 Cr)</option>
+                        <option value="Infinity Microfinance Bittiya Sanstha Ltd" data-swift="IMBSNPKA">Infinity Microfinance Bittiya Sanstha Ltd (2017/01/20, Gaidakot, Nawalparasi, 7.00 Cr)</option>
+                        <option value="Adhikhola Laghubitta Bittiya Sanstha Ltd." data-swift="ALBSNPKA">Adhikhola Laghubitta Bittiya Sanstha Ltd. (2017/02/12, Bhirkot, Syangja, 1.92 Cr)</option>
+                        <option value="Swabhiman Microfinance Bittiya Sanstha Ltd." data-swift="SMBSNPKA">Swabhiman Microfinance Bittiya Sanstha Ltd. (2017/05/22, Tilottama, Rupandehi, 3.85 Cr)</option>
+                        <option value="Sparsha Laghubitta Bittiya Sanstha Ltd." data-swift="SLBSNPKA">Sparsha Laghubitta Bittiya Sanstha Ltd. (2017/07/13, Pokhara Lekhnath, Kaski, 5.60 Cr)</option>
+                        <option value="Sabaiko Laghubitta Bittiya Sanstha Ltd." data-swift="SLBSNPKA">Sabaiko Laghubitta Bittiya Sanstha Ltd. (2017/07/14, Bandipur, Tanahu, 11.20 Cr)</option>
+                        <option value="Arthik Samriddhi Laghubitta Bittiya Sanstha Ltd." data-swift="ASBSNPKA">Arthik Samriddhi Laghubitta Bittiya Sanstha Ltd. (2017/09/13, Bhanu, Tanahu, 2.45 Cr)</option>
+                        <option value="Sadhana Laghubitta Bittiya Sanstha Ltd." data-swift="SLBSNPKA">Sadhana Laghubitta Bittiya Sanstha Ltd. (2017/10/30, Gorkha, Gorkha, 2.45 Cr)</option>
+                        <option value="NIC Asia Laghubitta Bittiya Sanstha Ltd." data-swift="NALBNPKA">NIC Asia Laghubitta Bittiya Sanstha Ltd. (2017/11/21, Bherimalika, Jajarkot, 7.00 Cr)</option>
+                        <option value="Sarathi Laghubitta Bittiya Sanstha Ltd." data-swift="SLBSNPKA">Sarathi Laghubitta Bittiya Sanstha Ltd. (2017/11/21, Byas, Tanahu, 7.00 Cr)</option>
+                        <option value="Nagarik Laghubitta Bittiya Sanstha Limited" data-swift="NLBSNPKA">Nagarik Laghubitta Bittiya Sanstha Limited (2017/12/14, Banepa, Kabhre, 1.75 Cr)</option>
+                        <option value="Trilok Laghubitta Bittiya Sanstha Limited" data-swift="TLBSNPKA">Trilok Laghubitta Bittiya Sanstha Limited (2018/01/25, Sunwal, Nawalparashi, 3.01 Cr)</option>
+                        <option value="Manakamana Laghubitta Bittiya Sanstha Limited" data-swift="MLBSNPKA">Manakamana Laghubitta Bittiya Sanstha Limited (2018/01/25, Hariwan, Sarlahi, 1.40 Cr)</option>
+                        <option value="Sahakarya Laghubitta Bittiya Sanstha Limited" data-swift="SLBSNPKA">Sahakarya Laghubitta Bittiya Sanstha Limited (2018/02/01, Hariwan, Sarlahi, 4.55 Cr)</option>
+                        <option value="Sajeelo Laghu Bitta Bittiya Sanstha Limited" data-swift="SLBSNPKA">Sajeelo Laghu Bitta Bittiya Sanstha Limited (2018/02/07, Gorkha, Gorkha, 14.00 Cr)</option>
+                        <option value="Satyawati Laghubitta Bittiya Sanstha Limited" data-swift="SLBSNPKA">Satyawati Laghubitta Bittiya Sanstha Limited (2018/03/23, Buddhabhumi, Kapilbastu, 1.58 Cr)</option>
+                        <option value="Buddha Jyoti Laghubitta Bittiya Sanstha Limited" data-swift="BJBSNPKA">Buddha Jyoti Laghubitta Bittiya Sanstha Limited (Lumbini Sanskritik, Rupundehi, 1.20 Cr)</option>
+                        <option value="Samaj Laghubitta Bittiya Sanstha Limited" data-swift="SLBSNPKA">Samaj Laghubitta Bittiya Sanstha Limited (Malangawa, Sarlahi, 1.14 Cr)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <label for="qrColor" class="w-1/3 text-dark-green font-semibold"><i class="fas fa-palette mr-2"></i> QR Color:</label>
+                <input type="color" id="qrColor" name="qrColor" value="#2f855a" class="w-2/3 p-2 border border-lime-green rounded-lg">
+            </div>
+
+            <button type="submit" class="w-full bg-forest-green text-white p-3 rounded-lg hover:bg-lime-green transition duration-300 font-semibold">
+                <i class="fas fa-qrcode mr-2"></i> Generate QR Code
+            </button>
+            <p id="errorMessage" class="text-red-500 text-center font-medium"></p>
+        </form>
+
+        <div class="mt-8 p-6 bg-light-green rounded-lg flex flex-col items-center shadow-inner">
+            <div id="qrcode" class="mb-6"></div>
+            <div class="flex space-x-4">
+                <button id="downloadButton" class="bg-forest-green text-white p-3 rounded-lg hover:bg-lime-green transition duration-300 hidden font-semibold">
+                    <i class="fas fa-download mr-2"></i> Download QR Code
+                </button>
+                <button id="copyButton" class="bg-forest-green text-white p-3 rounded-lg hover:bg-lime-green transition duration-300 hidden font-semibold">
+                    <i class="fas fa-copy mr-2"></i> Copy QR Data
+                </button>
+            </div>
+        </div>
+        <footer class="text-center mt-10 text-dark-green flex justify-center items-center space-x-2">
+            <p>
+              Made with <i class="fas fa-heart text-red-500" aria-hidden="true"></i>
+              <a href="http://www.bibekpandey007.com.np" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                by Bibek Pandey
+              </a>
+            </p>
+          </footer>
+          
+    </div>
+
+
+
+    <script>
+        let BCode = "";
+        const bankSelect = document.getElementById("bankSelect");
+
+        bankSelect.addEventListener("change", function () {
+            const selectedOption = this.options[this.selectedIndex];
+            BCode = selectedOption.getAttribute("data-swift");
+        });
+
+        $(document).ready(function () {
+            const qrCodeForm = document.getElementById("qrCodeForm");
+            const qrCodeContainer = document.getElementById("qrcode");
+            const errorMessage = document.getElementById("errorMessage");
+            const downloadButton = document.getElementById("downloadButton");
+            const copyButton = document.getElementById("copyButton");
+            const accountNumberInput = document.getElementById("accountNumber");
+            const qrColorInput = document.getElementById("qrColor");
+
+            qrCodeForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const fullName = document.getElementById("fullName").value;
+                const accNumber = accountNumberInput.value;
+                const qrColor = qrColorInput.value;
+
+                if (fullName && accNumber && BCode) {
+                    const data = {
+                        accountNumber: accNumber,
+                        accountName: fullName,
+                        bankCode: BCode
+                    };
+                    const qrData = JSON.stringify(data);
+
+                    const qr = new QRious({
+                        value: qrData,
+                        size: 200,
+                        background: 'white',
+                        foreground: qrColor
+                    });
+
+                    qrCodeContainer.innerHTML = '';
+                    qrCodeContainer.appendChild(qr.image);
+                    errorMessage.textContent = '';
+
+                    downloadButton.style.display = 'inline-block';
+                    copyButton.style.display = 'inline-block';
+
+                    copyButton.onclick = function () {
+                        navigator.clipboard.writeText(qrData).then(() => {
+                            alert("QR Code data copied to clipboard!");
+                        });
+                    };
+
+                    downloadButton.onclick = function () {
+                        const fileName = `${fullName}-Qrcode.png`;
+                        const link = document.createElement('a');
+                        link.href = qr.image.src;
+                        link.download = fileName;
+                        link.click();
+                    };
+                } else {
+                    errorMessage.textContent = 'All fields are required.';
+                    qrCodeContainer.innerHTML = '';
+                    downloadButton.style.display = 'none';
+                    copyButton.style.display = 'none';
+                }
+            });
+
+            accountNumberInput.addEventListener("input", function () {
+                this.value = this.value.toUpperCase();
+            });
+
+            qrColorInput.addEventListener("input", function () {
+                if (qrCodeContainer.querySelector('img')) {
+                    const qr = new QRious({
+                        value: JSON.stringify({
+                            accountNumber: accountNumberInput.value,
+                            accountName: document.getElementById("fullName").value,
+                            bankCode: BCode
+                        }),
+                        size: 200,
+                        background: 'white',
+                        foreground: this.value
+                    });
+                    qrCodeContainer.innerHTML = '';
+                    qrCodeContainer.appendChild(qr.image);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
