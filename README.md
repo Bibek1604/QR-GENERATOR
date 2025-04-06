@@ -11,42 +11,8 @@ This project implements a feature that allows users to generate unique QR codes 
 - **Downloadable QR Code**: The generated QR code can be downloaded for users to store or print.
 - **Secure Data**: The information in the QR code is only accessible by scanning the QR code, ensuring privacy and security.
 
-## Installation
 
-1. **Clone the Repository**
 
-   Clone this repository to your local machine using:
-
-   ```bash
-   git clone https://github.com/Bibek1604/QR-GENERATOR.git
-   ```
-
-2. **Install Dependencies**
-
-   Navigate to the project directory and install the required dependencies:
-
-   ```bash
-   cd qr-code-bank
-   pip install -r requirements.txt
-   ```
-
-3. **Set Up Database**
-
-   Run the following commands to apply migrations and set up the database:
-
-   ```bash
-   python manage.py migrate
-   ```
-
-4. **Run the Application**
-
-   To run the application locally, use the following command:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-   The server will start running on `http://127.0.0.1:8000` by default.
 
 ## Usage
 
@@ -56,18 +22,8 @@ This project implements a feature that allows users to generate unique QR codes 
 4. The system will generate a QR code, which will appear on the screen.
 5. Click **Download QR Code** to save the QR code image to your device.
 
-## Security Considerations
 
-- The QR code will encode the name and bank account number, which should be shared only with trusted parties.
-- It’s recommended to not share QR codes in public spaces to prevent unauthorized scanning.
-- Ensure that your website uses HTTPS to keep data transmission secure.
 
-## Technologies Used
-
-- **Backend**: Django
-- **QR Code Generation**: `qrcode` library
-- **Frontend**: HTML, CSS, JavaScript
-- **Hosting**: Local/Cloud server
 
 ## Contributing
 
